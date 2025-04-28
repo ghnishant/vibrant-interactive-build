@@ -5,12 +5,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import StudyPage from "./pages/StudyPage";
 import PracticePage from "./pages/PracticePage";
 import InterviewsPage from "./pages/InterviewsPage";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 const queryClient = new QueryClient();
 
@@ -18,18 +21,22 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <BrowserRouter>
-        <Toaster />
-        <Sonner />
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/study" element={<StudyPage />} />
-            <Route path="/practice" element={<PracticePage />} />
-            <Route path="/interviews" element={<InterviewsPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/study" element={<StudyPage />} />
+              <Route path="/practice" element={<PracticePage />} />
+              <Route path="/interviews" element={<InterviewsPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AnimatePresence>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

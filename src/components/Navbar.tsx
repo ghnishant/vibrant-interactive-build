@@ -1,7 +1,7 @@
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Book,
   Video,
@@ -9,11 +9,14 @@ import {
   Menu,
   X,
   Search,
-  Home
+  Home,
+  LogOut
 } from "lucide-react";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
@@ -48,12 +51,28 @@ const Navbar = () => {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-sky text-sky hover:bg-sky hover:text-white">
-            Sign In
-          </Button>
-          <Button className="bg-sky text-white hover:bg-sky/90">
-            Sign Up
-          </Button>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span className="text-gray-700">Welcome, {user.name}</span>
+              <Button 
+                variant="outline" 
+                className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={logout}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button variant="outline" className="border-sky text-sky hover:bg-sky hover:text-white" onClick={() => navigate('/login')}>
+                Sign In
+              </Button>
+              <Button className="bg-sky text-white hover:bg-sky/90" onClick={() => navigate('/signup')}>
+                Sign Up
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -101,14 +120,38 @@ const Navbar = () => {
               <Video size={18} />
               <span>Interviews</span>
             </Link>
-            <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
-              <Button variant="outline" className="border-sky text-sky hover:bg-sky hover:text-white">
-                Sign In
-              </Button>
-              <Button className="bg-sky text-white hover:bg-sky/90">
-                Sign Up
-              </Button>
-            </div>
+            
+            {user ? (
+              <>
+                <span className="text-gray-700 p-2">Welcome, {user.name}</span>
+                <Button 
+                  variant="outline" 
+                  className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                <Button variant="outline" className="border-sky text-sky hover:bg-sky hover:text-white" onClick={() => {
+                  navigate('/login');
+                  setMobileMenuOpen(false);
+                }}>
+                  Sign In
+                </Button>
+                <Button className="bg-sky text-white hover:bg-sky/90" onClick={() => {
+                  navigate('/signup');
+                  setMobileMenuOpen(false);
+                }}>
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </nav>
         </div>
       )}
