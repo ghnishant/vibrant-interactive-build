@@ -25,17 +25,17 @@ const Footer = () => {
               <li><Link to="/study" className="text-gray-500 hover:text-sky">Study Materials</Link></li>
               <li><Link to="/practice" className="text-gray-500 hover:text-sky">Practice Tests</Link></li>
               <li><Link to="/interviews" className="text-gray-500 hover:text-sky">Mock Interviews</Link></li>
-              <li><Link to="/blog" className="text-gray-500 hover:text-sky">Career Blog</Link></li>
+              <li><Link to="/dashboard" className="text-gray-500 hover:text-sky">Career Blog</Link></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-bold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-500 hover:text-sky">About Us</Link></li>
-              <li><Link to="/careers" className="text-gray-500 hover:text-sky">Careers</Link></li>
-              <li><Link to="/contact" className="text-gray-500 hover:text-sky">Contact Us</Link></li>
-              <li><Link to="/privacy" className="text-gray-500 hover:text-sky">Privacy Policy</Link></li>
+              <li><Link to="/dashboard" className="text-gray-500 hover:text-sky">About Us</Link></li>
+              <li><Link to="/dashboard" className="text-gray-500 hover:text-sky">Careers</Link></li>
+              <li><Link to="/dashboard" className="text-gray-500 hover:text-sky">Contact Us</Link></li>
+              <li><Link to="/dashboard" className="text-gray-500 hover:text-sky">Privacy Policy</Link></li>
             </ul>
           </div>
           
@@ -47,7 +47,7 @@ const Footer = () => {
             </div>
             <div className="flex items-start space-x-2">
               <HelpCircle size={18} className="text-sky mt-1" />
-              <span className="text-gray-500">Need help? Visit our <Link to="/help" className="text-sky hover:underline">help center</Link></span>
+              <span className="text-gray-500">Need help? Visit our <Link to="/dashboard" className="text-sky hover:underline">help center</Link></span>
             </div>
           </div>
         </div>
